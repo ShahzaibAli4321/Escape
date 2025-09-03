@@ -314,7 +314,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.12100314, y: -0, z: -0, w: 0.9926521}
-  m_LocalPosition: {x: 1.6920929, y: 3.500002, z: -11.774535}
+  m_LocalPosition: {x: 0, y: 3.500002, z: -11.774535}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -653,11 +653,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 562c7bffb4896cf4ba93f9f956446cfe, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.6920929
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 562c7bffb4896cf4ba93f9f956446cfe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.4999981
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 562c7bffb4896cf4ba93f9f956446cfe, type: 3}
       propertyPath: m_LocalPosition.z
@@ -695,6 +695,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Remy@Breathing Idle
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 562c7bffb4896cf4ba93f9f956446cfe, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: df7313dca41be1d40b09e718af34f3ea, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 562c7bffb4896cf4ba93f9f956446cfe, type: 3}
+      propertyPath: m_AnimatePhysics
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 562c7bffb4896cf4ba93f9f956446cfe, type: 3}
+      propertyPath: m_WarningMessage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 562c7bffb4896cf4ba93f9f956446cfe, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -702,6 +718,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 562c7bffb4896cf4ba93f9f956446cfe, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2054081970}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 562c7bffb4896cf4ba93f9f956446cfe, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2054081973}
   m_SourcePrefab: {fileID: 100100000, guid: 562c7bffb4896cf4ba93f9f956446cfe, type: 3}
 --- !u!1 &2054081967 stripped
 GameObject:
@@ -720,6 +739,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e5e3db6da930b94f8ee623067330d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!143 &2054081973
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054081967}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 3.7
+  m_Radius: 0.46
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1.88, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
