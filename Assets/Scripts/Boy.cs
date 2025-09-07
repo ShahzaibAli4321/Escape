@@ -3,6 +3,10 @@ using UnityEngine;
 public class Boy : MonoBehaviour
 {
     Animator animator;
+    float velocityX = 0.0f;
+    float velocityZ = 0.0f;
+    public float acceleration = 2f;
+    public float deceleration = 2f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -13,22 +17,54 @@ public class Boy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.UpArrow))
+        animator.SetFloat("Velocity X", velocityX);
+        animator.SetFloat("Velocity Z", velocityZ);
+        transform.Translate(new Vector3(velocityX, 0, velocityZ) * Time.deltaTime * 20f);
+
+        // Forward Movement
+        if (Input.GetKey(KeyCode.UpArrow) && velocityZ <= 0.5f)
         {
-            if (animator.GetBool("Forward") == false)
-            {
-                Debug.Log("Walking");
-            }
-            animator.SetBool("Forward", true);
+            velocityZ += Time.deltaTime * acceleration;
         }
 
-        if (!Input.GetKey(KeyCode.UpArrow))
+        if (!Input.GetKey(KeyCode.UpArrow) && velocityZ > 0.0f)
         {
-            if (animator.GetBool("Forward") == true)
-            {
-                Debug.Log("Not Walking");
-            }
-            animator.SetBool("Forward", false);
+            velocityZ -= Time.deltaTime * deceleration;
+        }
+
+
+        // Backwards movement
+        if (Input.GetKey(KeyCode.DownArrow) && velocityZ >= -0.5f)
+        {
+            velocityZ -= Time.deltaTime * acceleration;
+        }
+
+        if (!Input.GetKey(KeyCode.DownArrow) && velocityZ < 0.0f)
+        {
+            velocityZ += Time.deltaTime * deceleration;
+        }
+
+
+        // Left movement
+        if (Input.GetKey(KeyCode.LeftArrow) && velocityX >= -0.5f)
+        {
+            velocityX -= Time.deltaTime * acceleration;
+        }
+
+        if (!Input.GetKey(KeyCode.LeftArrow) && velocityX < 0.0f)
+        {
+            velocityX += Time.deltaTime * deceleration;
+        }
+
+        // Right movement
+        if (Input.GetKey(KeyCode.RightArrow) && velocityX <= 0.5f)
+        {
+            velocityX += Time.deltaTime * acceleration;
+        }
+
+        if (!Input.GetKey(KeyCode.RightArrow) && velocityX > 0.0f)
+        {
+            velocityX -= Time.deltaTime * deceleration;
         }
     }
 }
