@@ -25,8 +25,8 @@ public class ThirdPersonMovement : MonoBehaviour
     public LayerMask groundMask;
 
     [Header("Jump Settings")]
-    float maxJumpHeight = 200.0f;
-    float maxJumpTime = 5.0f;
+    float maxJumpHeight = 20.0f;
+    float maxJumpTime = 1.0f;
 
     private float gravity;
     private float groundedGravity = -0.05f;

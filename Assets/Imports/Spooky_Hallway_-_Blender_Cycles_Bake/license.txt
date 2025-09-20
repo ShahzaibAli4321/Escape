@@ -1,0 +1,11 @@
+Model Information:
+* title:	Spooky Hallway - Blender Cycles Bake
+* source:	https://sketchfab.com/3d-models/spooky-hallway-blender-cycles-bake-670fc17602434ce2a8d398e1a4c9d928
+* author:	fizzlefreshh (https://sketchfab.com/fizzlefreshh)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Spooky Hallway - Blender Cycles Bake" (https://sketchfab.com/3d-models/spooky-hallway-blender-cycles-bake-670fc17602434ce2a8d398e1a4c9d928) by fizzlefreshh (https://sketchfab.com/fizzlefreshh) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
