@@ -39,6 +39,13 @@ public class Dog : MonoBehaviour
     private float stateTimer;
     private bool isIdle;
 
+    private GameSaveManager saveManager;
+    void Start()
+    {
+        // find the GameSaveManager in the scene
+        saveManager = FindAnyObjectByType<GameSaveManager>();
+    }
+
     void Update()
     {
         if (!isFollowing || player == null)
@@ -66,7 +73,6 @@ public class Dog : MonoBehaviour
                 WanderAroundPlayer();
             }
         }
-        Debug.Log(animator.GetFloat("DogSpeed"));
 
         // Always keep the dog on the ground
         KeepDogGrounded();
@@ -159,7 +165,6 @@ public class Dog : MonoBehaviour
 
         transform.position = Vector3.MoveTowards(transform.position, wanderTarget, wanderSpeed * Time.deltaTime);
         animator.SetFloat("DogSpeed", wanderSpeed);
-        Debug.Log("Wander");
 
         // Rotate only on Y axis
         if (direction != Vector3.zero)
@@ -176,108 +181,6 @@ public class Dog : MonoBehaviour
             stateTimer = wanderChangeInterval;
         }
     }
-
-
-    //private void WanderAroundPlayer()
-    //{
-    //    float distance = Vector3.Distance(transform.position, player.position);
-
-    //    // If dog is too far, follow the player
-    //    if (distance > followDistance)
-    //    {
-    //        FollowPlayer();
-    //        return;
-    //    }
-
-    //    // If too close, just stop and face the player (respect stopDistance)
-    //    if (distance < stopDistance)
-    //    {
-    //        Vector3 faceDir = (player.position - transform.position).normalized;
-    //        faceDir.y = 0;
-    //        if (faceDir != Vector3.zero)
-    //        {
-    //            Quaternion targetRotation = Quaternion.LookRotation(faceDir);
-    //            targetRotation = Quaternion.Euler(0, targetRotation.eulerAngles.y, 0);
-    //            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-    //        }
-    //        return;
-    //    }
-
-    //    // Pause before picking a new wander target
-    //    if (!hasWanderTarget)
-    //    {
-    //        stateTimer -= Time.deltaTime;
-    //        if (stateTimer <= 0f)
-    //        {
-    //            // Pick a random point around the player within comfort distance
-    //            Vector2 randomCircle = Random.insideUnitCircle.normalized * Random.Range(comfortDistance * 0.5f, comfortDistance);
-    //            wanderTarget = player.position + new Vector3(randomCircle.x, 0, randomCircle.y);
-
-    //            hasWanderTarget = true;
-    //        }
-    //        else
-    //        {
-    //            return; // keep waiting
-    //        }
-    //    }
-
-    //    // Move toward wander target
-    //    Vector3 direction = (wanderTarget - transform.position).normalized;
-    //    direction.y = 0;
-
-    //    transform.position = Vector3.MoveTowards(transform.position, wanderTarget, wanderSpeed * Time.deltaTime);
-
-    //    // Rotate only on Y axis
-    //    if (direction != Vector3.zero)
-    //    {
-    //        Quaternion targetRotation = Quaternion.LookRotation(direction);
-    //        targetRotation = Quaternion.Euler(0, targetRotation.eulerAngles.y, 0);
-    //        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-    //    }
-
-    //    // If reached wander target, clear and wait before choosing a new one
-    //    if (Vector3.Distance(transform.position, wanderTarget) < 0.5f)
-    //    {
-    //        hasWanderTarget = false;
-    //        stateTimer = wanderChangeInterval; // wait a bit before picking next point
-    //    }
-    //}
-
-
-
-
-    //private void WanderAroundPlayer()
-    //{
-    //    stateTimer -= Time.deltaTime;
-
-    //    if (stateTimer <= 0)
-    //    {
-    //        if (Random.value < idleChance)
-    //        {
-    //            // Switch to idle
-    //            isIdle = true;
-    //            stateTimer = Random.Range(minIdleTime, maxIdleTime);
-    //            return;
-    //        }
-
-    //        // Pick a new wander point around the player
-    //        Vector2 randomCircle = Random.insideUnitCircle * wanderRadius;
-    //        wanderTarget = player.position + new Vector3(randomCircle.x, 0, randomCircle.y);
-
-    //        stateTimer = wanderChangeInterval;
-    //    }
-
-    //    // Move towards wander target
-    //    Vector3 direction = (wanderTarget - transform.position).normalized;
-    //    transform.position = Vector3.MoveTowards(transform.position, wanderTarget, wanderSpeed * Time.deltaTime);
-    //    animator.SetFloat("DogSpeed", wanderSpeed);
-
-    //    if (direction != Vector3.zero)
-    //    {
-    //        Quaternion targetRotation = Quaternion.LookRotation(direction);
-    //        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-    //    }
-    //}
 
     private void HandleIdle()
     {
@@ -306,6 +209,8 @@ public class Dog : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isFollowing = true;
+            saveManager.Save("checkpoint");
+            Debug.Log("Checkpoint reached! Game saved.");
             GetComponent<Collider>().enabled = false; // disables the trigger after use
         }
     }
