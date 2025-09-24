@@ -12,6 +12,8 @@ public class FirstPersonMovement : MonoBehaviour
     private bool isGrounded;
     private bool isJumping;
 
+    public AudioSource Whistle;
+
     [Header("Animation")]
     public Animator animator;
 
@@ -43,9 +45,15 @@ public class FirstPersonMovement : MonoBehaviour
         HandleGroundCheck();
         HandleGravity();
         HandleCrouch();
+        
         if(!animator.GetBool("isCrouching"))
         {
             HandleJump();
+        }
+
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            Whistle.Play();
         }
     }
 

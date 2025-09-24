@@ -40,14 +40,21 @@ public class Dog : MonoBehaviour
     private bool isIdle;
 
     private GameSaveManager saveManager;
+    public AudioSource DogBark;
     void Start()
     {
         // find the GameSaveManager in the scene
         saveManager = FindAnyObjectByType<GameSaveManager>();
+        DogBark.enabled = false;
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F) && DogBark.enabled)
+        {
+            DogBark.Play();
+        }
+
         if (!isFollowing || player == null)
         {
             KeepDogGrounded();
