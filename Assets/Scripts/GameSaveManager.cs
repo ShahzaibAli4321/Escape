@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class GameSaveManager : MonoBehaviour
 {
@@ -9,13 +10,7 @@ public class GameSaveManager : MonoBehaviour
 
     void Update()
     {
-        // Testing keybinds
-        if (Input.GetKeyDown(KeyCode.Alpha1)) Save("slot1");
-        if (Input.GetKeyDown(KeyCode.Alpha2)) Save("slot2");
 
-        if (Input.GetKeyDown(KeyCode.F1)) Load("slot1");
-        if (Input.GetKeyDown(KeyCode.F2)) Load("slot2");
-        if (Input.GetKeyDown(KeyCode.L))  LoadCheckpoint();
     }
 
     public void Save(string slotName)
@@ -37,17 +32,34 @@ public class GameSaveManager : MonoBehaviour
             data.enemies.Add(ed);
         }
 
-        SaveSystem.Save(data, slotName);
-        Debug.Log("Game Saved in slot: " + slotName);
+        try
+        {
+            SaveSystem.Save(data, "slot1");
+            Debug.Log("Saved successfully!");
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Save failed: " + e.Message);
+            throw;
+        }
     }
 
-    public void Load(string slotName)
+    public bool Load(string slotName)
     {
-        GameData data = SaveSystem.Load(slotName);
+        GameData data;
+        try
+        {
+            data = SaveSystem.Load(slotName);
+        }
+        catch (Exception e)
+        {
+            throw;
+        }
+
         if (data == null)
         {
             Debug.Log("No save file found in slot: " + slotName);
-            return;
+            return false;
         }
 
         // Restore player
@@ -90,11 +102,6 @@ public class GameSaveManager : MonoBehaviour
         }
 
         Debug.Log("Game Loaded from slot: " + slotName);
+        return true;
     }
-
-    public void LoadCheckpoint()
-    {
-        Load("checkpoint");
-    }
-
 }

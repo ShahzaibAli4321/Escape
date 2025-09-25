@@ -82,39 +82,6 @@ public class EnemyJumpscare : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-
-    //private IEnumerator JumpscareSequence(Transform enemy)
-    //{
-    //    // Snap enemy in front of camera
-    //    enemy.position = jumpscarePoint.position;
-    //    enemy.rotation = Quaternion.LookRotation(playerCamera.forward);
-
-    //    // Disable AI / Animator if needed
-    //    Animator anim = enemy.GetComponent<Animator>();
-    //    if (anim) anim.enabled = false;
-
-    //    // Play scream
-    //    if (scareSound != null)
-    //        audioSource.PlayOneShot(scareSound);
-
-    //    // Flash screen red
-    //    if (flashImage != null)
-    //    {
-    //        flashImage.color = new Color(1, 0, 0, 1); // fully red
-    //        yield return new WaitForSeconds(flashDuration);
-    //        flashImage.color = new Color(1, 0, 0, 0); // clear
-    //    }
-
-    //    // Camera shake
-    //    yield return StartCoroutine(ShakeCamera());
-
-    //    // Wait before game over
-    //    yield return new WaitForSeconds(delayBeforeGameOver);
-
-    //    // Reload current scene (you can replace with GameOverManager)
-    //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    //}
-
     private IEnumerator ShakeCamera()
     {
         Vector3 originalPos = playerCamera.localPosition;

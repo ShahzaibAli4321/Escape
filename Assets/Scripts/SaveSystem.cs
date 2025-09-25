@@ -29,12 +29,11 @@ public static class SaveSystem
         return null;
     }
 
-    public static void DeleteSave(string fileName)
+    public static void DeleteAllSaves()
     {
-        string path = folder + fileName + ".json";
-        if (File.Exists(path))
+        if (Directory.Exists(folder))
         {
-            File.Delete(path);
+            Directory.Delete(folder, true); // true deletes all files/subdirectories
         }
     }
 }

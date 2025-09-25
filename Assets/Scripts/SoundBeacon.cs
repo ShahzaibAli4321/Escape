@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 public class SoundBeacon : MonoBehaviour
@@ -7,6 +7,8 @@ public class SoundBeacon : MonoBehaviour
     public Transform dog;         // Drag Dog here
     public float desiredDistance = 5f;   // Distance beacon keeps from player
     public float updateRate = 0.5f;      // How often NavMesh target updates
+    private AudioLowPassFilter lowPass;
+    public LayerMask wallMask;           // set to your "Walls" layer
 
     private NavMeshAgent agent;
     private AudioSource beaconAudio;
@@ -16,6 +18,9 @@ public class SoundBeacon : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         beaconAudio = GetComponent<AudioSource>();
+        // Add a low-pass filter if not already present
+        lowPass = gameObject.AddComponent<AudioLowPassFilter>();
+        lowPass.cutoffFrequency = 22000; // no effect initially
     }
 
     void Update()
@@ -40,6 +45,21 @@ public class SoundBeacon : MonoBehaviour
 
             // Use NavMeshAgent to pathfind
             agent.SetDestination(targetPos);
+        }
+
+        // === Occlusion Check ===
+        Vector3 toPlayer = player.position - transform.position;
+        if (Physics.Raycast(transform.position, toPlayer.normalized, out RaycastHit hit, toPlayer.magnitude, wallMask))
+        {
+            // Wall in the way → muffled
+            lowPass.cutoffFrequency = 1000;
+            beaconAudio.volume = 0.5f;
+        }
+        else
+        {
+            // Clear line of sight → normal
+            lowPass.cutoffFrequency = 22000;
+            beaconAudio.volume = 1f;
         }
     }
 

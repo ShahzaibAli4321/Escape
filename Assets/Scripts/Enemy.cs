@@ -292,12 +292,11 @@ public class Enemy : MonoBehaviour
                 soundOwner = this;
             }
 
-                // Game Over
-                if (distance <= catchDistance)
+            // Game Over
+            if (distance <= catchDistance)
             {
                 Debug.Log("Game Over! Enemy caught the player.");
                 FindAnyObjectByType<EnemyJumpscare>().TriggerJumpscare(transform);
-
             }
 
             // Switch into inner chase if within 20 units
