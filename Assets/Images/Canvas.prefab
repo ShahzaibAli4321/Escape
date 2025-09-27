@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Escape
+  m_text: Escape , P
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 71700774fbc3b0449b52e3de912cc1d2, type: 2}
   m_sharedMaterial: {fileID: -8785718776603123930, guid: 71700774fbc3b0449b52e3de912cc1d2, type: 2}
@@ -1009,6 +1009,9 @@ MonoBehaviour:
   SaveMenuUI: {fileID: 3656864222895758590}
   LoadMenuUI: {fileID: 9179632782314818760}
   OptionsMenuUI: {fileID: 3913221988617307951}
+  StartScreen: {fileID: 0}
+  CheckpointUI: {fileID: 0}
+  cursorTexture: {fileID: 0}
   pauseKey: 27
 --- !u!1 &1264047217586664597
 GameObject:
@@ -4682,7 +4685,7 @@ RectTransform:
   m_Children:
   - {fileID: 2020477921643544014}
   - {fileID: 5257081496952672268}
-  - {fileID: 2352022319599732786}
+  - {fileID: 7202530302420269289}
   - {fileID: 4481115591200886404}
   - {fileID: 2634321478875197554}
   - {fileID: 3016161400050135247}
@@ -11497,6 +11500,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sound Control
       objectReference: {fileID: 0}
+    - target: {fileID: 3997727323240563997, guid: 42ee9890b4f008040ae5fc603d14100b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997727323240563997, guid: 42ee9890b4f008040ae5fc603d14100b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997727323240563997, guid: 42ee9890b4f008040ae5fc603d14100b, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4867443836045799151, guid: 42ee9890b4f008040ae5fc603d14100b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -11589,13 +11604,21 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8897122416929300156, guid: 42ee9890b4f008040ae5fc603d14100b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8897122416929300156, guid: 42ee9890b4f008040ae5fc603d14100b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42ee9890b4f008040ae5fc603d14100b, type: 3}
---- !u!224 &2352022319599732786 stripped
+--- !u!224 &7202530302420269289 stripped
 RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4867443836045799151, guid: 42ee9890b4f008040ae5fc603d14100b, type: 3}
+  m_CorrespondingSourceObject: {fileID: 61971301356265012, guid: 42ee9890b4f008040ae5fc603d14100b, type: 3}
   m_PrefabInstance: {fileID: 7145151813604665053}
   m_PrefabAsset: {fileID: 0}

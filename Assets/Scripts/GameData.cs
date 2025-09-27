@@ -13,5 +13,6 @@ public class GameData
 {
     public float[] playerPosition;
     public float[] dogPosition;
+    public bool isFollowing;
     public List<EnemyData> enemies;
 }

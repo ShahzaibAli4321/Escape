@@ -7,7 +7,13 @@ public class PauseMenuManager : MonoBehaviour
     public GameObject SaveMenuUI;
     public GameObject LoadMenuUI;
     public GameObject OptionsMenuUI;
-    public KeyCode pauseKey = KeyCode.Escape;
+    public GameObject StartScreen;
+    public GameObject CheckpointUI;
+    public GameObject NoDataPopUp;
+    public GameObject ErrorPopUp;
+    public GameObject WarningPopUp;
+    public GameObject Saveconfirm;
+    public Texture2D cursorTexture;
     public static bool isPaused = false;
 
     void Start()
@@ -16,11 +22,16 @@ public class PauseMenuManager : MonoBehaviour
         SaveMenuUI.SetActive(false);
         LoadMenuUI.SetActive(false);
         OptionsMenuUI.SetActive(false);
+        CheckpointUI.SetActive(false);
+        NoDataPopUp.SetActive(false);
+        ErrorPopUp.SetActive(false);
+        WarningPopUp.SetActive(false);
+        Saveconfirm.SetActive(false);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(pauseKey))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             if (isPaused)
                 Resume();
@@ -32,6 +43,15 @@ public class PauseMenuManager : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
+        LoadMenuUI.SetActive(false);
+        SaveMenuUI.SetActive(false);
+        OptionsMenuUI.SetActive(false);
+        StartScreen.SetActive(false);
+        CheckpointUI.SetActive(false);
+        NoDataPopUp.SetActive(false);
+        ErrorPopUp.SetActive(false);
+        WarningPopUp.SetActive(false);
+        Saveconfirm.SetActive(false);
         Time.timeScale = 1f;
         AudioListener.pause = false; // unmute all audio
         Cursor.lockState = CursorLockMode.Locked;
@@ -44,7 +64,7 @@ public class PauseMenuManager : MonoBehaviour
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         AudioListener.pause = false; // unmute all audio
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(1);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         isPaused = false;
@@ -81,6 +101,8 @@ public class PauseMenuManager : MonoBehaviour
         AudioListener.pause = true; // mute all audio
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        // set the custom cursor again
+        Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
         isPaused = true;
     }
 }

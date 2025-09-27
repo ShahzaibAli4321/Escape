@@ -9,6 +9,7 @@ public class LoadMenuManager : MonoBehaviour
     public GameObject NoDataPopUp;
     public GameObject ErrorPopUp;
     public TextMeshProUGUI error;
+    public Texture2D cursorTexture;
     private string slotname;
     GameSaveManager gsm;
 
@@ -62,11 +63,22 @@ public class LoadMenuManager : MonoBehaviour
             {
                 ErrorPopUp.SetActive(false);
                 LoadMenuUI.SetActive(false);
-                Time.timeScale = 1f;
                 AudioListener.pause = false; // unmute all audio
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
                 PauseMenuManager.isPaused = false;
+                if (!MainMenuManager.isLoaded)
+                {
+                    Time.timeScale = 1f;
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                }
+                else if (MainMenuManager.isLoaded)
+                {
+                    Time.timeScale = 0f;
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                    // set the custom cursor again
+                    Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+                }
             }
             else
             {

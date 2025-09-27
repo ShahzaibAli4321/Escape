@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class FirstPersonMovement : MonoBehaviour
 {
@@ -13,9 +14,12 @@ public class FirstPersonMovement : MonoBehaviour
     private bool isJumping;
 
     public AudioSource Whistle;
+    public Light light;
 
     [Header("Animation")]
     public Animator animator;
+    public GameObject Prologue;
+    public Texture2D cursorTexture;
 
     [Header("Ground Check")]
     public Transform groundCheck;
@@ -34,9 +38,14 @@ public class FirstPersonMovement : MonoBehaviour
     {
         CalculateJumpVariables();
 
-        // Lock cursor for horror game immersion
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        Prologue.SetActive(true);
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        // set the custom cursor again
+        Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+
+        light.enabled = false;
     }
 
     void Update()
@@ -54,6 +63,10 @@ public class FirstPersonMovement : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.F))
         {
             Whistle.Play();
+        }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            light.enabled = !light.enabled;
         }
     }
 

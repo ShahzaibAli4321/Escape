@@ -10,6 +10,7 @@ public class MainMenuManager : MonoBehaviour
     public GameObject NoDataPopUp;
     public GameObject ErrorPopUp;
     public GameObject WarningPopUp;
+    public Texture2D cursorTexture;
     public TextMeshProUGUI error;
     public static string slotname;
     GameSaveManager gsm1;
@@ -24,6 +25,11 @@ public class MainMenuManager : MonoBehaviour
         ErrorPopUp.SetActive(false);
         WarningPopUp.SetActive(false);
         gsm1 = FindAnyObjectByType<GameSaveManager>();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        // set the custom cursor again
+        Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+        AudioListener.pause = false;
     }
 
     // Update is called once per frame
@@ -53,6 +59,7 @@ public class MainMenuManager : MonoBehaviour
     {
         try
         {
+            isLoaded = false;
             SaveSystem.DeleteAllSaves();
             SceneManager.LoadScene(1);
         }

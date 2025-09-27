@@ -111,10 +111,10 @@ MonoBehaviour:
   obstructionMask:
     serializedVersion: 2
     m_Bits: 0
-  chaseSpeed: 7
+  chaseSpeed: 7.5
   rotationSpeed: 5
   catchDistance: 0.5
-  innerChaseRadius: 20
+  innerChaseRadius: 27
   reDetectionDelay: 3
   groundLayer:
     serializedVersion: 2

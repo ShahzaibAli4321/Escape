@@ -58,7 +58,6 @@ public class EnemyJumpscare : MonoBehaviour
         enemy.position = jumpscarePoint.position;
         enemy.LookAt(playerCamera);
         enemy.Rotate(-50f, 0f, 0f); // tilt head upwards (negative X rotates up)
-        //enemy.rotation = Quaternion.LookRotation(playerCamera.forward);
 
         // Play scream
         if (scareSound != null)
@@ -79,7 +78,7 @@ public class EnemyJumpscare : MonoBehaviour
         yield return new WaitForSeconds(delayBeforeGameOver);
 
         // Reload scene or call game over
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(0);
     }
 
     private IEnumerator ShakeCamera()

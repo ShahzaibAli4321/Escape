@@ -16,8 +16,8 @@ public class DisableBeacon : MonoBehaviour
             dogAudio = dog.DogBark;
 
         // Disable dog's AudioSource at start
-        //if (dogAudio != null)
-        //    dogAudio.enabled = false;
+        if (dogAudio != null)
+            dogAudio.enabled = false;
     }
 
     void OnTriggerEnter(Collider other)

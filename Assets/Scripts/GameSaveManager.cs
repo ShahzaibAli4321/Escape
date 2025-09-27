@@ -19,6 +19,7 @@ public class GameSaveManager : MonoBehaviour
         {
             playerPosition = new float[] { player.position.x, player.position.y, player.position.z },
             dogPosition = new float[] { dog.position.x, dog.position.y, dog.position.z },
+            isFollowing = Dog.isFollowing,
             enemies = new List<EnemyData>()
         };
 
@@ -34,7 +35,7 @@ public class GameSaveManager : MonoBehaviour
 
         try
         {
-            SaveSystem.Save(data, "slot1");
+            SaveSystem.Save(data, slotName);
             Debug.Log("Saved successfully!");
         }
         catch (Exception e)
@@ -78,10 +79,17 @@ public class GameSaveManager : MonoBehaviour
 
         Debug.Log("Player moved to: " + player.position);
 
-        //player.position = new Vector3(data.playerPosition[0], data.playerPosition[1], data.playerPosition[2]);
-
         // Restore dog
-        dog.position = new Vector3(data.dogPosition[0], data.dogPosition[1], data.dogPosition[2]);
+        var agent = dog.GetComponent<UnityEngine.AI.NavMeshAgent>();
+        if (agent != null)
+        {
+            agent.Warp(new Vector3(data.dogPosition[0], data.dogPosition[1], data.dogPosition[2]));
+        }
+        else
+        {
+            dog.position = new Vector3(data.dogPosition[0], data.dogPosition[1], data.dogPosition[2]);
+        }
+        Dog.isFollowing = data.isFollowing;
 
         // Restore enemies
         for (int i = 0; i < data.enemies.Count && i < enemies.Count; i++)
@@ -89,16 +97,6 @@ public class GameSaveManager : MonoBehaviour
             EnemyData ed = data.enemies[i];
             enemies[i].transform.position = new Vector3(ed.position[0], ed.position[1], ed.position[2]);
             enemies[i].isChasing = ed.isChasing;
-
-            // Optional: restart chase if loaded in chasing state
-            if (ed.isChasing)
-            {
-                enemies[i].isChasing = true;
-            }
-            else
-            {
-                enemies[i].isChasing = false;
-            }
         }
 
         Debug.Log("Game Loaded from slot: " + slotName);
